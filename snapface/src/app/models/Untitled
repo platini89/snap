@@ -1,0 +1,10 @@
+// creation d'une classe pour les facesnaps
+// cette classe sera utilisee pour creer les facesnaps
+
+export class FaceSnap {
+  constructor(public title: string,
+              public description: string,
+              public imageUrl: string,
+              public createdAt: Date,
+              public snaps: number) {}
+}
