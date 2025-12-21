@@ -30,4 +30,10 @@ export class FaceSnap {
               setLocation(location: string): void {
                 this.location = location;
               }
+
+              // acces a la localisation
+              withLocation(location: string): FaceSnap {
+                this.setLocation(location);
+                return this;
+              }
 }
