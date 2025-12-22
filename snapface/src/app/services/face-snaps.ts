@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FaceSnap } from '../models/face-snap';
+import { SnapType } from '../models/snap-type.type';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class FaceSnapsServices {
       new Date(),
       6
     ).withLocation('à la montagne'),
-    
+
     new FaceSnap(
       'Un bon repas',
       'Mmmh que c\'est bon !',
@@ -33,9 +34,23 @@ export class FaceSnapsServices {
   ];
 //  this.faceSnaps[1].setLocation('à la montagne');
 
+// methode pour snap un facesnap par son id
+getFaceSnapById(faceSnapId: string): FaceSnap {
+  const foundFaceSnap = this.faceSnaps.find(faceSnap => faceSnap.id === faceSnapId);
+  if (!foundFaceSnap) {
+    throw new Error('FaceSnap not found!');
+  }
+  return foundFaceSnap;
+}
+
+snapFaceSnapById(faceSnapId: string, snapType: SnapType): void {
+  const faceSnap = this.getFaceSnapById(faceSnapId);
+  faceSnap.snap(snapType);
+}
+
 //  methode pour retouner ,afficher les face snaps
 getFaceSnaps(): FaceSnap[] {
   return [...this.faceSnaps];
 }
-  
+
 }

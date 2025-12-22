@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FaceSnaps } from './face-snaps';
+import { FaceSnap } from '../models/face-snap';
 
 describe('FaceSnaps', () => {
-  let service: FaceSnaps;
+  let service: FaceSnap;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FaceSnaps);
+    service = TestBed.inject(FaceSnap);
   });
 
   it('should be created', () => {
