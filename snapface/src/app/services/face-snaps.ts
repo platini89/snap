@@ -53,4 +53,34 @@ getFaceSnaps(): FaceSnap[] {
   return [...this.faceSnaps];
 }
 
+
+
+
+
+
+addFaceSnap(formValue: {
+  title: string;
+  description: string;
+  imageUrl: string;
+  location?: string;
+}): void {
+
+  const newFaceSnap = new FaceSnap(
+    formValue.title,
+    formValue.description,
+    formValue.imageUrl,
+    new Date(),
+    0
+  );
+
+  if (formValue.location) {
+    newFaceSnap.setLocation(formValue.location);
+  }
+
+  this.faceSnaps.push(newFaceSnap);
+}
+
+
+
+
 }
