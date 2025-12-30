@@ -1,5 +1,5 @@
 import { Component, OnInit,  } from '@angular/core';
-import { Headercomponent } from './header/header';
+import { Headercomponent } from './core/components/header/header';
 import { RouterOutlet } from '@angular/router';
 
 

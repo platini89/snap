@@ -8,14 +8,14 @@ export class FaceSnap {
 // propriete pour la location
   location?: string;
 
-  id: string;
+  id: number | string;
 
 
 
   constructor(public title: string,
               public description: string,
               public imageUrl: string,
-              public createdAt: Date,
+              public createdDate: Date,
               public snaps: number) {
 
       // genere un id unique 

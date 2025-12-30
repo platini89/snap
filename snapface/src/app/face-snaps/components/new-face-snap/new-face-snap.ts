@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup , FormBuilder , } from '@angular/forms';
-import { FaceSnap } from '../models/face-snap';
-import { Observable , map } from 'rxjs';
+import { FaceSnap } from '../../../core/models/face-snap';
+import { Observable , map, tap } from 'rxjs';
 import { AsyncPipe, DatePipe, NgIf, UpperCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { FaceSnapsServices } from '../services/face-snaps';
+import { FaceSnapsServices } from '../../../core/services/face-snaps';
 
 @Component({
   selector: 'app-new-face-snap',
@@ -21,11 +21,11 @@ export class NewFaceSnap implements OnInit {
 // observable pour visualiser les  changements de valeur du formulaire
   faceSnapPreview$!: Observable<FaceSnap>;
 
-// expression reguliaire 
+// expression reguliaire
   urlRegex!: RegExp;
 
 
-  constructor( private formBuilder : FormBuilder, 
+  constructor( private formBuilder : FormBuilder,
     private faceSnapsService: FaceSnapsServices,
     private router: Router) {}
 
@@ -44,11 +44,11 @@ export class NewFaceSnap implements OnInit {
 });
 
 // ONSERVER LES CHAMGEMENTS DU FORMULAIRE
-  
+
   this.faceSnapPreview$ = this.snapForm.valueChanges.pipe(
     map(formValue => ({
         ...formValue,
-        createdAt: new Date(),
+        createdDate: new Date(),
         snaps: 0,
         id: 0
     }))
@@ -57,10 +57,13 @@ export class NewFaceSnap implements OnInit {
 
 
 // methodes pour envoyer le formulaire
-  onSubmitForm() {
-    this.faceSnapsService.addFaceSnap(this.snapForm.value);
-    this.router.navigateByUrl('/facesnaps');
-}
+
+    onSubmitForm() {
+      this.faceSnapsService.addFaceSnaps(this.snapForm.value).pipe(
+          tap(() => this.router.navigateByUrl('/facesnaps'))
+      ).subscribe();
+  }
+
 
 
 }

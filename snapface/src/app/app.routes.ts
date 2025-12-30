@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { FaceSnapList } from './face-snap-list/face-snap-list';
-import { LandingPage } from './landing-page/landing-page';
-import { NewFaceSnap } from './new-face-snap/new-face-snap';
-import { singleFaceSnapComponent } from './single-face-snap/single-face-snap';
+import { LandingPage } from './landing-page/components/landing-page';
+import { Login } from './auth/components/login/login';
 
 export const routes: Routes = [
-    { path: 'facesnaps/:id', component: singleFaceSnapComponent },
-    { path: 'facesnaps', component: FaceSnapList },
-    { path: 'create', component: NewFaceSnap },
-    { path: '' , component: LandingPage}
+    {
+      path: 'facesnaps',
+      loadChildren: () => import('./face-snaps/face-snaps.routes').then(m => m.faceSnapsRoutes)
+    },
+    { path: '', component: LandingPage },
+    { path: 'auth/login', component: Login }
 ];
